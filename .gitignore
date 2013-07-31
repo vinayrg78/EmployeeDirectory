@@ -1,0 +1,7 @@
+bin/*
+target/*
+src/main/webapp/WEB-INF/lib/*
+src/main/webapp/WEB-INF/classes/*
+src/main/webapp/app/.idea/*
+src/main/webapp/app/.DS_Store
+.DS_Store

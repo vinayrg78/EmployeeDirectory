@@ -1,0 +1,39 @@
+
+<div class="container">
+
+    <br />
+    <input type="text" placeholder="Search ..." class="form-search"  ng-model="filter.searchName"/>
+    <br />
+
+    <table class="table table-condensed table-hover table-bordered">
+        <thead style="background-color: #1DD4DB;">
+            <th>Name</th>
+            <th>Project</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="emp in employees | filter:filter.searchName | orderBy:'project'"
+                ng-click="loadDetails({{emp}});">
+                <td> {{ emp.name }} </td>
+                <td> {{ emp.project }} </td>
+                <td style="text-align: center;">
+                    <button class="btn btn-danger btn-mini" ng-click="deleteEmployee({{emp}});" stop-event='click'>
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>
+
+<div class="container">
+    <form class="form-search">
+        <input type="text" placeholder="Name" ng-model="newEmployee.name"  class="input-medium search-query">
+        <input type="text" placeholder="Project" ng-model="newEmployee.project"  class="input-medium search-query">
+        <input type="text" placeholder="Motto" ng-model="newEmployee.motto"  class="input-medium search-query">
+        
+        <button ng-click="addNewEmployee()" class="btn btn-primary">&nbsp;&nbsp;Add&nbsp;&nbsp;</button>
+    </form>
+</div>
