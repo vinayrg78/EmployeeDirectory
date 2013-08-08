@@ -19,7 +19,7 @@ import com.sb.repositories.EmployeeRepository;
 
 
 @Controller
-@RequestMapping(value="/rest/loadEmployees")
+@RequestMapping(value="/rest/loadEmployees/**")
 public class LoadEmployeesController{
 
 	@Autowired
@@ -34,13 +34,20 @@ public class LoadEmployeesController{
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody String handleRequestInternal() {
+    public @ResponseBody String getEmployees() {
         Gson gson = new Gson();
         List<Employee> employeeList = employeeRepository.getAllEmployees();
         Type typeOfSrc = new TypeToken<List<Employee>>(){}.getType();
         String jsonString = gson.toJson(employeeList, typeOfSrc);
         return jsonString;
     }
+	
+	
+	@RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
+    public @ResponseBody Employee getEmployee(@PathVariable String id) {
+        return employeeRepository.getEmployee(id);
+    }
+
 
 	@RequestMapping(method = RequestMethod.POST)
     public @ResponseBody void add(@RequestBody Employee employee) {
@@ -52,18 +59,5 @@ public class LoadEmployeesController{
         return employeeRepository.deleteEmployee(id);
     }
 	
-	
-//	private List<Employee> getEmployeeList() {
-//		List<Employee> eList = new ArrayList<Employee>();
-//		eList.add(new Employee(1, "Mark Wahlberg", "IJ-I", "Thou shall not steal!"));
-//		eList.add(new Employee(2, "Vinay Gangoli", "PRO-CTCAE", "Dont fix what ain't broke!"));
-//		eList.add(new Employee(3, "Saurabh Agarwal", "CGW", "If it ain't tested, it ain't fixed!"));
-//		eList.add(new Employee(4, "Monish Dombla", "CTRP", "You can fix anything with the right Hammer!"));
-//		eList.add(new Employee(5, "Ramakrishna Gundala", "C3PR", "If you dont fix it, I will!"));
-//		eList.add(new Employee(6, "Kumar Sambhuni", "CaAERS", "Mr. Problem Solver!"));
-//		
-//		return eList;
-//	}
-
 }
 

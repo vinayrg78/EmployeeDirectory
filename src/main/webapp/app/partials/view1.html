@@ -2,22 +2,33 @@
 <div class="container">
 
     <br />
-    <input type="text" placeholder="Search ..." class="form-search"  ng-model="filter.searchName"/>
-    <br />
+    <div class="no-left-padding">
+        <span class="col-lg-3 no-left-padding">
+            <input type="text" class="form-control" placeholder="Search ..."  ng-model="searchBy" />
+        </span>
+
+        <span class="col-lg-3 offset2">
+            <select ng-model="sortorder" class="form-control">
+                <option selected value="name">Name</option>
+                <option value="project">Project</option>
+            </select>
+        </span>
+    </div>
+    <br /> <br /> <br />
 
     <table class="table table-condensed table-hover table-bordered">
-        <thead style="background-color: #1DD4DB;">
+        <thead class="table-head">
             <th>Name</th>
             <th>Project</th>
             <th></th>
         </thead>
         <tbody>
-            <tr ng-repeat="emp in employees | filter:filter.searchName | orderBy:'project'"
-                ng-click="loadDetails({{emp}});">
+            <tr ng-repeat="emp in employees | filter:searchBy | orderBy:sortorder"
+                ng-click="loadDetails(emp.id);">
                 <td> {{ emp.name }} </td>
                 <td> {{ emp.project }} </td>
                 <td style="text-align: center;">
-                    <button class="btn btn-danger btn-mini" ng-click="deleteEmployee({{emp}});" stop-event='click'>
+                    <button class="btn btn-danger btn-mini" ng-click="deleteEmployee(emp.id);" stop-event='click'>
                         Delete
                     </button>
                 </td>
@@ -29,11 +40,20 @@
 </div>
 
 <div class="container">
-    <form class="form-search">
-        <input type="text" placeholder="Name" ng-model="newEmployee.name"  class="input-medium search-query">
-        <input type="text" placeholder="Project" ng-model="newEmployee.project"  class="input-medium search-query">
-        <input type="text" placeholder="Motto" ng-model="newEmployee.motto"  class="input-medium search-query">
-        
-        <button ng-click="addNewEmployee()" class="btn btn-primary">&nbsp;&nbsp;Add&nbsp;&nbsp;</button>
+    <form>
+        <div class="form-group no-left-padding">
+            <div class="col-lg-2 no-left-padding">
+                <input type="text" placeholder="Name" ng-model="newEmployee.name"  class="form-control">
+            </div>
+            <div class="col-lg-2 no-left-padding">
+                <input type="text" placeholder="Project" ng-model="newEmployee.project"  class="form-control">
+            </div>
+            <div class="col-lg-2 no-left-padding">
+                <input type="text" placeholder="Motto" ng-model="newEmployee.motto"  class="form-control">
+            </div>
+            <div class="col-lg-3">
+                <button ng-click="addNewEmployee()" class="btn btn-primary">&nbsp;&nbsp;Add&nbsp;&nbsp;</button>
+            </div>
+        </div>
     </form>
 </div>

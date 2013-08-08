@@ -4,19 +4,26 @@
  */
 
 var SimpleController = function($scope, $location, simpleFactory){
-    
+
+    $scope.sortorder='name';
+    $scope.searchBy='';
+
     var init = function(){
+        $scope.getEmployees();
+    };
+
+    $scope.getEmployees = function(){
         simpleFactory.getEmployees().then(
             function(dataObj){
                 $scope.employees = dataObj.data;
             }
         );
-    };
+    }
 
     $scope.addNewEmployee = function(){
         simpleFactory.addEmployee($scope.newEmployee).then(
             function(dataObj){
-                $scope.employees = simpleFactory.getEmployeeCache();
+                $scope.getEmployees();
             }        
         );
         
@@ -25,16 +32,16 @@ var SimpleController = function($scope, $location, simpleFactory){
         $scope.newEmployee.motto = '';
     };
 
-    $scope.deleteEmployee = function(employee){
-        simpleFactory.deleteEmployee(employee).then(
+    $scope.deleteEmployee = function(employeeId){
+        simpleFactory.deleteEmployee(employeeId).then(
             function(dataObj){
-                $scope.employees = simpleFactory.getEmployeeCache();
+                $scope.getEmployees();
             }        
         );
     };
 
-    $scope.loadDetails = function(employee){
-        $location.path("/view2/" + employee.id);
+    $scope.loadDetails = function(employeeId){
+        $location.path("/view2/" + employeeId);
     };
     
     init();
@@ -44,11 +51,29 @@ var SimpleController = function($scope, $location, simpleFactory){
 var MoreDetailsController = function($scope, $routeParams, simpleFactory){
 
     var init = function(){
-        if($routeParams.employeeId !== null){
-            $scope.selectedEmployee = simpleFactory.getEmployee($routeParams.employeeId);
+        if($routeParams.employee !== null){
+
+            simpleFactory.getEmployee($routeParams.employeeId).then(
+                function(dataObj){
+                    debugger;
+                    $scope.selectedEmployee = dataObj.data;
+                }
+            );
+
+            $scope.updated = false;
         }
     };
-    
+
+    $scope.updateEmployee = function(employee){
+
+        simpleFactory.updateEmployee(employee).then(
+          function(dataObj){
+              $scope.updated = true;
+          }
+        );
+
+    }
+
     init();
 }
 

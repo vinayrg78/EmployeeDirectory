@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import org.springframework.stereotype.Repository;
 
@@ -22,12 +23,20 @@ public class EmployeeRepository {
     @Autowired
     MongoTemplate mongoTemplate;
  
+    public Employee getEmployee(String id){
+    	return mongoTemplate.findById(id, Employee.class);
+    }
+    
     public List<Employee> getAllEmployees() {
         return mongoTemplate.findAll(Employee.class);
     }
  
     public void insertEmployee(Employee emp) {
         mongoTemplate.insert(emp);
+    }
+    
+    public void updateEmployee(Employee emp) {
+        mongoTemplate.save(emp);
     }
     
     public Employee deleteEmployee(String id) {

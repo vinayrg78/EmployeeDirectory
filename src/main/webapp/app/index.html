@@ -2,7 +2,8 @@
 <html ng-app="employeeDirectoryModule">
 <head>
     <title>Employee Directory</title>
-    <link rel="stylesheet" href="scripts/bootstrap.css" />
+    <link rel="shortcut icon" href="images/tree.jpg"/>
+    <link rel="stylesheet" href="scripts/bootstrap/css/bootstrap.css" />
     <style>
         .body-content {
             background: #f7f7f7 url(images/bg_texture.jpg) repeat scroll 0 0;
@@ -10,60 +11,57 @@
             -moz-box-shadow: rgba(0,0,0,.1) -5px 5px 5px;
             -webkit-box-shadow: rgba(0,0,0,.1) 0 5px 5px;
         }
-        
-		.hero-unit{
-		    background-color: #1DD4DB;
-		}
+
+        .table-head{
+            background-color: rgb(255, 211, 98);
+        }
+
+        .no-left-padding{
+            padding-left: 0;
+        }
+
+        .navbar{
+            background-color: black;
+        }
+        .bs-footer {
+            padding-top: 40px;
+            padding-bottom: 30px;
+            margin-top: 100px;
+            text-align: center;
+            border-top: 1px solid #e5e5e5;
+        }
     </style>
 </head>
 <body>
 
-    <!-- header -->
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand " href="#/view1">
-                    Employee Directory
-                </a>
-                <ul class="nav nav-pills">
-                    <!--<li ng-class="{'active':getClass('/view3')}"><a href="#/view3">About Us</a></li> -->
-                    <li class="active"><a href="#/view3">About Us</a></li>
-                </ul>
-            </div>
+        <!-- header -->
+        <div class="navbar">
+            <a class="navbar-brand" href="#/view1">Employee Directory</a>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Add</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
         </div>
-    </div>
-    <br /><br /><br />
 
-    <div class="container">
-        <div ng-view=""></div>
-    </div>
 
-    <!-- footer -->
-    <br /><br /><br />
-    <div id="footer">
-        <div class="navbar navbar-fixed-bottom">
-            <div class="navbar-inner">
-                <div class="container">
-                    <footer>
-                        <div class="row">
-                            <div class="span8">
-                                <em>Created by Vinay Gangoli</em>
-                            </div>
-                            <div class="span4">
-                                <a href="mailto:#">
-                                    Email : vinay.gangoli@semanticbits.com
-                                </a>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            </div>
+        <div class="container">
+            <div ng-view=""></div>
         </div>
-    </div>
+
+
+        <!-- footer -->
+        <footer class="bs-footer">
+            <p class="text-muted">
+               Built with caring hands by   <a href="mailto:#"><strong>vinay.gangoli@semanticbits.com</strong></a>.
+            </p>
+        </footer>
+
 
 
     <!-- Vendor Libs -->
     <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap/js/bootstrap.min.js"></script>
     <script src="scripts/angular.js"></script>
 
     <!-- App Libs-->
@@ -71,7 +69,6 @@
     <script src="controllers/controllers.js"></script>
     <script src="factories/factory.js"></script>
     <script src="directives/customHtml.js"></script>
-
 
 </body>
 </html>

@@ -1,46 +1,90 @@
 
-    <div class="hero-unit">
-        <div class="row">
-            <div class="span8">
-                <h2>{{ selectedEmployee.name }}</h2>
-                <p class="text-info">Motto: {{ selectedEmployee.motto }}</p>
-            </div>
-            <div class="span2">
-                <img src="images/tree.jpg" class="img-rounded"/>
-            </div>
+<div class="alert alert-success fade in" ng-show="updated">
+    <span class="close" data-dismiss="alert">&times;</span>
+    <strong>Well done!</strong> You've successfully updated this employee's information.
+</div>
+
+<div id="update-container" class="container">
+
+
+    <div class="jumbotron table-head">
+    <div class="media">
+        <a class="pull-right" href="#">
+            <img src="images/tree.jpg" class="img-rounded" />
+        </a>
+        <div class="media-body">
+            <h1 class="media-heading">
+                {{selectedEmployee.name}}
+            </h1>
+            <h3>{{selectedEmployee.motto}}</h3>
         </div>
     </div>
+    </div>
 
-    <form class="form-horizontal">
-        <fieldset>
-            <legend>Details</legend>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+             <h3 class="panel-title">Details </h3>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="inputEmail">Email</label>
-                <div class="controls">
-                    <input type="text" id="inputEmail" placeholder="Email">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="inputPhone">Phone</label>
-                <div class="controls">
-                    <input type="text" id="inputPhone" placeholder="Phone">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="inputAddress">Address</label>
-                <div class="controls">
-                    <textarea rows="3" id="inputAddress" placeholder="Address" />
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label for="emailAddress" class="col-lg-2 control-label">Email address</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="emailAddress" placeholder="Email" ng-model="selectedEmployee.emailAddress" />
                 </div>
             </div>
 
-        </fieldset>
-    </form>
+            <div class="form-group">
+                <label for="phoneNumber" class="col-lg-2 control-label">Phone number</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="Phone" ng-model="selectedEmployee.phoneNumber" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address" class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-5">
+                    <textarea class="form-control" id="address" placeholder="127.0.0.1" ng-model="selectedEmployee.address"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="hobbies" class="col-lg-2 control-label">Hobbies</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="hobbies" placeholder="What I do after work .." ng-model="selectedEmployee.hobbies" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="musicPreferences" class="col-lg-2 control-label">Music Preferences</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="musicPreferences" placeholder="What I enjoy listening to .." ng-model="selectedEmployee.musicPreferences" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="webHangouts" class="col-lg-2 control-label">Web hangouts</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="webHangouts" placeholder="Where I can be found online .." ng-model="selectedEmployee.webHangouts" />
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="motto" class="col-lg-2 control-label">Motto</label>
+                <div class="col-lg-5">
+                    <input type="text" class="form-control" id="motto" placeholder="I always say .." ng-model="selectedEmployee.motto" />
+                </div>
+            </div>
+        </form>
+
+    </div>
 
 
     <p>
-        <a class="btn btn-primary btn-large">
-            Learn more
-        </a>
+        <button ng-click="updateEmployee(selectedEmployee)" class="btn btn-primary">&nbsp;&nbsp;Update&nbsp;&nbsp;</button>
     </p>
+
+</div>
 

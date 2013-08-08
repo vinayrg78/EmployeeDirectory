@@ -6,15 +6,14 @@
 
 employeeDirectoryModule.factory('simpleFactory', function($http){
 
-    var employeeCache = [];
-
     var factory = {};
     
     factory.getEmployees = function(){
-        return $http.get('/EmployeeDirectory/rest/loadEmployees').success(
+        return $http.get('/EmployeeDirectory/rest/loadEmployees')
+        .success(
             function(data, status, headers, config){
-                employeeCache = data;
-            }    
+                console.log("success." );
+            }
         ).error(
             function(data, status, headers, config){
                 console.log("error." );
@@ -29,7 +28,7 @@ employeeDirectoryModule.factory('simpleFactory', function($http){
             data: {name:employee.name, project:employee.project, motto:employee.motto}
         }).success(
             function(data, status, headers, config){
-                employeeCache.push({name:config.data.name, project:config.data.project, motto:config.data.motto});
+                console.log("success." );
             }    
         ).error(
             function(data, status, headers, config){
@@ -38,14 +37,13 @@ employeeDirectoryModule.factory('simpleFactory', function($http){
         );
     };
 
-    factory.deleteEmployee = function(employee){
+    factory.deleteEmployee = function(employeeId){
         return $http({
-            url:"/EmployeeDirectory/rest/loadEmployees/" + employee.id,
+            url:"/EmployeeDirectory/rest/loadEmployees/" + employeeId,
             method: "DELETE"
         }).success(
             function(data, status, headers, config){
-                var index = factory.getEmployeeIndex(data.id);
-                employeeCache.splice(index, 1);
+                console.log("success." );
             }    
         ).error(
             function(data, status, headers, config){
@@ -53,31 +51,36 @@ employeeDirectoryModule.factory('simpleFactory', function($http){
             }        
         ); 
     };
-    
-    //operates on the cache
-    factory.getEmployee = function(employeeId){
-        var index = factory.getEmployeeIndex(employeeId);
-        return employeeCache[index];
-    };
 
-    //operates on the cache
-    factory.getEmployeeIndex = function(employeeId){
-        var i;
-        for(i = 0; i < employeeCache.length; i++){
-            if(employeeCache[i].id === employeeId){
-                break;
+    factory.updateEmployee = function(employee){
+        return $http({
+            url:"/EmployeeDirectory/rest/updateEmployees",
+            method: "POST",
+            data: employee
+        }).success(
+            function(data, status, headers, config){
+                console.log('success');
             }
-        }
-        return i;
+        ).error(
+            function(data, status, headers, config){
+                console.log('error');
+            }
+        );
     };
 
-    factory.setEmployeeCache = function(employeeArray){
-        employeeCache = employeeArray;
+    factory.getEmployee = function(employeeId){
+        return $http.get('/EmployeeDirectory/rest/loadEmployees/getById/' + employeeId)
+        .success(
+            function(data, status, headers, config){
+                console.log('success');
+            }
+        ).error(
+            function(data, status, headers, config){
+                console.log('error');
+            }
+        );
     };
-    
-    factory.getEmployeeCache = function(){
-        return employeeCache;
-    };
-    
+
+
     return factory;
 });
